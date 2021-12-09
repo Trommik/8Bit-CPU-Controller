@@ -1,0 +1,31 @@
+﻿<Window x:Class="CPUController.UI.Windows.StatusMessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:StatusViewModel}"
+        MinWidth="400" MinHeight="300"
+        Closing="StatusMessageWindow_OnClosing"
+        Title="8-Bit CPU Controller - Status Messages" Height="450" Width="800">
+
+    <ListBox ItemsSource="{Binding StatusMessages}" Margin="5">
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ApplicationStatusMessage}">
+                <StackPanel Orientation="Horizontal">
+                    <!-- TODO: Add status icons -->
+                    <!-- <ContentPresenter Width="24" Height="24" -->
+                    <!--                   Content="{Binding Status, Converter={StaticResource AppStatusToIcon}}" -->
+                    <!--                   Margin="10" -->
+                    <!--                   VerticalAlignment="Center" /> -->
+                    <TextBlock Margin="5" Text="{Binding Timestamp, StringFormat=[HH:mm:ss]}"
+                               VerticalAlignment="Center"
+                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem, Mode=FindAncestor}}" />
+                    <TextBlock Margin="5" Text="{Binding Message}" VerticalAlignment="Center"
+                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem, Mode=FindAncestor}}" />
+                </StackPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</Window>

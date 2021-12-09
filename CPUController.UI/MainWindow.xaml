@@ -1,0 +1,28 @@
+﻿<mah:MetroWindow x:Class="CPUController.UI.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:views="clr-namespace:CPUController.UI.Views"
+                 xmlns:ui="clr-namespace:CPUController.UI"
+                 mc:Ignorable="d"
+                 d:DataContext="{d:DesignInstance ui:MainViewModel}"
+                 DataContext="{StaticResource MainViewModel}"
+                 Title="8-Bit CPU Controller"
+                 MinHeight="450" MinWidth="580"
+                 Height="450" Width="800" TitleCharacterCasing="Normal">
+
+    <DockPanel Margin="5">
+
+        <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
+            <views:ConfigView DataContext="{Binding ConfigViewModel}" />
+
+            <views:ControlWordView DataContext="{Binding ControlWordViewModel}" />
+            <views:OutputRegisterView DataContext="{Binding OutputRegisterViewModel}" />
+        </StackPanel>
+        
+        <views:ProgramView DockPanel.Dock="Top" DataContext="{Binding ProgramViewModel}" />
+
+    </DockPanel>
+</mah:MetroWindow>
