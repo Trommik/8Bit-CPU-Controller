@@ -7,7 +7,7 @@
              xmlns:views="clr-namespace:CPUController.UI.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="5"
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
              d:DataContext="{d:DesignInstance viewModels:ProgramViewModel}">
 
     <GroupBox Header="Program">
@@ -28,7 +28,7 @@
             <Button Grid.Row="0" Grid.Column="1" Content="Save" Command="{Binding SaveCommand}" />
 
             <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                     Margin="3 5" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch"
+                     Margin="3 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                      IsSynchronizedWithCurrentItem="True"
                      SelectedItem="{Binding SelectedInstruction}"
                      ItemsSource="{Binding Instructions}">
