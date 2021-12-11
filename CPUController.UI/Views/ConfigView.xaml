@@ -22,11 +22,23 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Endpoint [url]:" FontWeight="Bold"
                        VerticalAlignment="Center" Margin="5 1" />
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Endpoint}" />
+            
+            <ScrollViewer Grid.Row="0" Grid.Column="1" x:Name="ScrollViewerEndpoint" 
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" >
+                <TextBox Text="{Binding Endpoint}" 
+                         MaxWidth="{Binding ElementName=ScrollViewerEndpoint, Path=ActualWidth}" 
+                         HorizontalAlignment="Stretch" />
+            </ScrollViewer>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Refresh Rate [ms]:" FontWeight="Bold"
                        VerticalAlignment="Center" Margin="5 1" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RefreshRate}" />
+            
+            <ScrollViewer Grid.Row="1" Grid.Column="1" x:Name="ScrollViewerRefreshRate" 
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" >
+                <TextBox Text="{Binding RefreshRate}" 
+                         MaxWidth="{Binding ElementName=ScrollViewerRefreshRate, Path=ActualWidth}" 
+                         HorizontalAlignment="Stretch"/>
+            </ScrollViewer>
         </Grid>
     </GroupBox>
 </UserControl>
