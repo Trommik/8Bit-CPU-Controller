@@ -19,6 +19,8 @@ namespace CPUController.UI
 
         public ProgramViewModel ProgramViewModel { get; } = new();
 
+        public ModeViewModel ModeViewModel { get; } = new();
+        
         public MainViewModel() { }
     }
 }

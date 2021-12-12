@@ -10,18 +10,26 @@
                  d:DataContext="{d:DesignInstance ui:MainViewModel}"
                  DataContext="{StaticResource MainViewModel}"
                  Title="8-Bit CPU Controller"
-                 MinHeight="450" MinWidth="580"
-                 Height="450" Width="800" TitleCharacterCasing="Normal">
+                 MinHeight="450" MinWidth="600"
+                 Height="500" Width="800" TitleCharacterCasing="Normal">
 
     <DockPanel Margin="5">
 
-        <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
-            <views:ConfigView DataContext="{Binding ConfigViewModel}" />
+        <ScrollViewer DockPanel.Dock="Left" 
+                      HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                
+                <views:ModeView DataContext="{Binding ModeViewModel}" />
+            
+                <views:ControlWordView DataContext="{Binding ControlWordViewModel}" />
+                <views:OutputRegisterView DataContext="{Binding OutputRegisterViewModel}" />
+            
+                <views:ConfigView DataContext="{Binding ConfigViewModel}" />
+                
+            </StackPanel>
 
-            <views:ControlWordView DataContext="{Binding ControlWordViewModel}" />
-            <views:OutputRegisterView DataContext="{Binding OutputRegisterViewModel}" />
-        </StackPanel>
-        
+        </ScrollViewer>
+       
         <views:ProgramView DockPanel.Dock="Top" DataContext="{Binding ProgramViewModel}" />
 
     </DockPanel>
