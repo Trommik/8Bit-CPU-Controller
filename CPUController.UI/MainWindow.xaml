@@ -18,7 +18,6 @@
             <StackPanel Orientation="Vertical">
                 <views:ModeView />
                 <views:ControlWordView />
-                <views:OutputRegisterView />
                 <views:ConfigView />
             </StackPanel>
         </ScrollViewer>

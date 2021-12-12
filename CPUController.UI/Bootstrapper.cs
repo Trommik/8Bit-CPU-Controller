@@ -39,7 +39,6 @@ namespace CPUController.UI
             container.RegisterType<StatusViewModel>();
 
             container.RegisterType<ControlWordViewModel>();
-            container.RegisterType<OutputRegisterViewModel>();
 
             // container.RegisterType<ValueInstructionViewModel>();
             // container.RegisterType<OpCodeInstructionViewModel>();

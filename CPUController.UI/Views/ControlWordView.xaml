@@ -14,24 +14,61 @@
         <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource LampToggleButtonStyle}" />
     </UserControl.Resources>
 
-    <GroupBox Header="CPU Control Word:">
-        <UniformGrid Rows="2" Columns="8">
-            <ToggleButton Content="HLT" IsChecked="{Binding HLT}" ToolTip="Stops the clock and halts the CPU" />
-            <ToggleButton Content="JMP" IsChecked="{Binding JMP}" ToolTip="Jump to value from the BUS" />
-            <ToggleButton Content="PCE" IsChecked="{Binding PCE}" ToolTip="Counter Enable" />
-            <ToggleButton Content="ARI" IsChecked="{Binding ARI}" ToolTip="Input value from BUS to A register" />
-            <ToggleButton Content="BRI" IsChecked="{Binding BRI}" ToolTip="Input value from BUS to B register" />
-            <ToggleButton Content="RDY" IsChecked="{Binding RDY}" ToolTip="Control signals ready" />
-            <ToggleButton Content="ORI" IsChecked="{Binding ORI}" ToolTip="Input value from BUS to output register" />
-            <ToggleButton Content="RRI" IsChecked="{Binding RRI}" ToolTip="Input value from BUS and write into RAM" />
-            <ToggleButton Content="MAI" IsChecked="{Binding MAI}" ToolTip="Input value from BUS to Memory Address Register" />
-            <ToggleButton Content="FRI" IsChecked="{Binding FRI}" ToolTip="Input results to flags register" />
-            <ToggleButton Content="SUB" IsChecked="{Binding SUB}" ToolTip="Subtract B-Register mode" />
-            <ToggleButton Content="IRI" IsChecked="{Binding IRI}" ToolTip="Input value from BUS to Instruction Register" />
-            <ToggleButton Content="CRI" IsChecked="{Binding CRI}" ToolTip="Input value from BUS to C Register" />
-            <ToggleButton Content="DA0" IsChecked="{Binding DA0}" ToolTip="Address one of output register demux" />
-            <ToggleButton Content="DA1" IsChecked="{Binding DA1}" ToolTip="Address two of output register demux" />
-            <ToggleButton Content="DA2" IsChecked="{Binding DA2}" ToolTip="Address three of output register demux" />
-        </UniformGrid>
-    </GroupBox>
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="Control Word:">
+            <UniformGrid Rows="2" Columns="8">
+                <ToggleButton Content="HLT" IsChecked="{Binding HLT}" IsEnabled="False"
+                              ToolTip="Stops the clock and halts the CPU" />
+                <ToggleButton Content="JMP" IsChecked="{Binding JMP}" IsEnabled="False"
+                              ToolTip="Jump to value from the BUS" />
+                <ToggleButton Content="PCE" IsChecked="{Binding PCE}" IsEnabled="False" 
+                              ToolTip="Counter Enable" />
+                <ToggleButton Content="ARI" IsChecked="{Binding ARI}" IsEnabled="False" 
+                              ToolTip="Input value from BUS to A register" />
+                <ToggleButton Content="BRI" IsChecked="{Binding BRI}" IsEnabled="False" 
+                              ToolTip="Input value from BUS to B register" />
+                <ToggleButton Content="RDY" IsChecked="{Binding RDY}" IsEnabled="False" 
+                              ToolTip="Control signals ready" />
+                <ToggleButton Content="ORI" IsChecked="{Binding ORI}" IsEnabled="False" 
+                              ToolTip="Input value from BUS to output register" />
+                <ToggleButton Content="RRI" IsChecked="{Binding RRI}" IsEnabled="False" 
+                              ToolTip="Input value from BUS and write into RAM" />
+                <ToggleButton Content="MAI" IsChecked="{Binding MAI}" IsEnabled="False" 
+                              ToolTip="Input value from BUS to Memory Address Register" />
+                <ToggleButton Content="FRI" IsChecked="{Binding FRI}" IsEnabled="False" 
+                              ToolTip="Input results to flags register" />
+                <ToggleButton Content="SUB" IsChecked="{Binding SUB}" IsEnabled="False" 
+                              ToolTip="Subtract B-Register mode" />
+                <ToggleButton Content="IRI" IsChecked="{Binding IRI}" IsEnabled="False" 
+                              ToolTip="Input value from BUS to Instruction Register" />
+                <ToggleButton Content="CRI" IsChecked="{Binding CRI}" IsEnabled="False" 
+                              ToolTip="Input value from BUS to C Register" />
+                <ToggleButton Content="DA0" IsChecked="{Binding DA0}" IsEnabled="False" 
+                              ToolTip="Address one of output register demux" />
+                <ToggleButton Content="DA1" IsChecked="{Binding DA1}" IsEnabled="False" 
+                              ToolTip="Address two of output register demux" />
+                <ToggleButton Content="DA2" IsChecked="{Binding DA2}" IsEnabled="False" 
+                              ToolTip="Address three of output register demux" />
+            </UniformGrid>
+        </GroupBox>
+        <GroupBox Header="Output Register:">
+            <UniformGrid Rows="1" Columns="8">
+                <ToggleButton Content="" IsChecked="{Binding OFF}" IsEnabled="False" />
+                <ToggleButton Content="PCO" IsChecked="{Binding PCO}" IsEnabled="False"
+                              ToolTip="Output value from Counter to the BUS" />
+                <ToggleButton Content="ARO" IsChecked="{Binding ARO}" IsEnabled="False"
+                              ToolTip="Output value from A-Register to the BUS" />
+                <ToggleButton Content="BRO" IsChecked="{Binding BRO}" IsEnabled="False"
+                              ToolTip="Output value from B-Register to the BUS" />
+                <ToggleButton Content="ERO" IsChecked="{Binding ERO}" IsEnabled="False"
+                              ToolTip="Output value from E-Register (ALU) to the BUS" />
+                <ToggleButton Content="RRO" IsChecked="{Binding RRO}" IsEnabled="False"
+                              ToolTip="Output value from RAM-Register to the BUS" />
+                <ToggleButton Content="CRO" IsChecked="{Binding CRO}" IsEnabled="False"
+                              ToolTip="Output value from C-Register to the BUS" />
+                <ToggleButton Content="EPO" IsChecked="{Binding EPO}" IsEnabled="False"
+                              ToolTip="Output value from External Programmer to the BUS" />
+            </UniformGrid>
+        </GroupBox>
+    </StackPanel>
 </UserControl>

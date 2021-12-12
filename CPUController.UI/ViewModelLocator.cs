@@ -32,10 +32,6 @@ namespace CPUController.UI
 
         public ControlWordViewModel ControlWordVm => _controlWordVm ??= Bootstrapper.Instance.Container.Resolve<ControlWordViewModel>();
 
-        private OutputRegisterViewModel _outputRegisterVm;
-
-        public OutputRegisterViewModel OutputRegisterVm => _outputRegisterVm ??= Bootstrapper.Instance.Container.Resolve<OutputRegisterViewModel>();
-
         #endregion
     }
 }
