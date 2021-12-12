@@ -28,7 +28,7 @@ namespace CPUController
         private void OnOpCodeChanged()
         {
             Value = (byte)OpCode;
-            NeedsParameter = EnumExtension.Contains<AddressableOpCode>((byte) OpCode);
+            NeedsParameter = EnumExtension.Contains<AddressableOpCode>((byte)OpCode);
         }
 
         /// <summary>

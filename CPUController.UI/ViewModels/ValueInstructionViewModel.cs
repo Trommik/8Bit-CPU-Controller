@@ -9,16 +9,16 @@ namespace CPUController.UI.ViewModels
     public class ValueInstructionViewModel : ViewModelBase, IInstructionViewModel
     {
         private readonly ValueInstruction _instruction;
-        
+
         /// <inheritdoc />
         public event EventHandler MemorySizeChanged;
-        
+
         [SuppressPropertyChangedWarnings]
         private void OnMemorySizeChanged()
         {
             MemorySizeChanged?.Invoke(this, EventArgs.Empty);
         }
-        
+
         /// <inheritdoc />
         public IInstruction Instruction => _instruction;
 
@@ -31,7 +31,7 @@ namespace CPUController.UI.ViewModels
 
         /// <inheritdoc />
         public byte MemorySize => 1;
-        
+
         /// <summary>
         /// The value of the instruction. 
         /// </summary>

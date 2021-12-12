@@ -12,16 +12,16 @@ namespace CPUController.UI.ViewModels
     public class OpCodeInstructionViewModel : ViewModelBase, IInstructionViewModel
     {
         private readonly OpCodeInstruction _instruction;
-        
+
         /// <inheritdoc />
         public event EventHandler MemorySizeChanged;
-        
+
         [SuppressPropertyChangedWarnings]
         private void OnMemorySizeChanged()
         {
             MemorySizeChanged?.Invoke(this, EventArgs.Empty);
         }
-        
+
         /// <inheritdoc />
         public IInstruction Instruction => _instruction;
 
@@ -31,11 +31,11 @@ namespace CPUController.UI.ViewModels
             get => _instruction.Address;
             set => _instruction.Address = value;
         }
-        
+
         /// <inheritdoc />
         [DependsOn(nameof(CurrentOpCode))]
-        public byte MemorySize => _instruction.NeedsParameter ? (byte) 2 : (byte) 1;
-        
+        public byte MemorySize => _instruction.NeedsParameter ? (byte)2 : (byte)1;
+
         /// <summary>
         /// The current selected <see cref="OpCode"/>.
         /// </summary>
@@ -50,7 +50,7 @@ namespace CPUController.UI.ViewModels
         {
             OnMemorySizeChanged();
         }
-        
+
         /// <summary>
         /// The visibility of the opcode parameter. 
         /// </summary>

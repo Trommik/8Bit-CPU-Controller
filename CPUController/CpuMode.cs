@@ -2,7 +2,7 @@
 {
     public enum CpuMode
     {
-        None, 
+        None,
         Execute,
         LoadCode
     }

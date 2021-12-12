@@ -35,7 +35,7 @@ namespace CPUController.UI.ViewModels
                 if (e.NewItems?.Count > 0)
                     foreach (IInstructionViewModel newItem in e.NewItems)
                         newItem.MemorySizeChanged += Instruction_MemorySizeChanged;
-                
+
                 Instruction_MemorySizeChanged(s, EventArgs.Empty);
             };
 
@@ -48,7 +48,7 @@ namespace CPUController.UI.ViewModels
             for (byte i = 0; i < Instructions.Count; i++)
             {
                 var currInstruction = Instructions[i];
-                    
+
                 if (i == 0)
                 {
                     currInstruction.MemoryAddress = 0;
@@ -56,7 +56,7 @@ namespace CPUController.UI.ViewModels
                 else
                 {
                     var prevInstruction = Instructions[i - 1];
-                    currInstruction.MemoryAddress = (byte) (prevInstruction.MemoryAddress + prevInstruction.MemorySize);
+                    currInstruction.MemoryAddress = (byte)(prevInstruction.MemoryAddress + prevInstruction.MemorySize);
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace CPUController.UI.ViewModels
                 CheckPathExists = true,
                 Filter = "CPU code (*.cpc)|*.cpc|All files (*.*)|*.*",
             };
-            
+
             // Check if aborted
             if (openFileDialog.ShowDialog() != true)
                 return;
@@ -112,7 +112,7 @@ namespace CPUController.UI.ViewModels
 
             // Clear all other instructions
             Instructions.Clear();
-            
+
             // Parse all lines
             foreach (string line in lines)
             {
@@ -128,7 +128,7 @@ namespace CPUController.UI.ViewModels
         public ICommand DeleteInstructionCommand => new RelayCommand(DeleteInstruction, CanDeleteInstruction);
 
         private bool CanDeleteInstruction() => Instructions.Any();
-        
+
         private void DeleteInstruction()
         {
             Instructions.Remove(SelectedInstruction);
@@ -143,8 +143,9 @@ namespace CPUController.UI.ViewModels
         {
             if (!Instructions.Any())
                 return true;
-            
+
             var lastInstruction = Instructions.Last();
+
             return lastInstruction.MemoryAddress + lastInstruction.MemorySize < 255;
         }
 
@@ -167,11 +168,12 @@ namespace CPUController.UI.ViewModels
         {
             if (!Instructions.Any())
                 return true;
-            
+
             var lastInstruction = Instructions.Last();
+
             return lastInstruction.MemoryAddress + lastInstruction.MemorySize < 255;
         }
-        
+
         private void AddValue()
         {
             var newInstruction = new ValueInstruction()

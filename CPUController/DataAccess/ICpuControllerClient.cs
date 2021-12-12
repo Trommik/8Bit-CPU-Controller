@@ -45,7 +45,7 @@ namespace CPUController.DataAccess
         /// </summary>
         /// <param name="code">The code to send to the cpu. </param>
         Task SetCode(byte[] code);
-        
+
         /// <summary>
         /// Resets the cpu. 
         /// </summary>

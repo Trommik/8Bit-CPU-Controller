@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:ModeViewModel}"
              VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5"
@@ -14,23 +14,23 @@
     <UserControl.Resources>
         <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource LampToggleButtonStyle}" />
     </UserControl.Resources>
-    
+
     <GroupBox Header="CPU Mode:">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <UniformGrid Grid.Row="0" Rows="1" Columns="2" Margin="5 10 5 15">
                 <TextBlock Text="Connected to CPU:" FontWeight="Bold" HorizontalAlignment="Center" />
                 <TextBlock Text="{Binding IsConnected}" FontWeight="Bold" HorizontalAlignment="Center" />
             </UniformGrid>
-            
+
             <UniformGrid Grid.Row="1" Rows="1" Columns="2">
                 <ToggleButton Content="Load Program" Height="40" Width="{x:Static sys:Double.NaN}"
                               FontSize="11" IsChecked="{Binding LoadCode}" />
-                <ToggleButton Content="Execute Program" Height="40" Width="{x:Static sys:Double.NaN}" 
+                <ToggleButton Content="Execute Program" Height="40" Width="{x:Static sys:Double.NaN}"
                               FontSize="11" IsChecked="{Binding Execute}" />
             </UniformGrid>
         </Grid>

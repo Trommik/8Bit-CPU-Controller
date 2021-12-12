@@ -15,7 +15,7 @@ namespace CPUController.UI.ViewModels
         /// <summary>
         /// The current loaded config. 
         /// </summary>
-        public  Config Config { get; set; }
+        public Config Config { get; set; }
 
         /// <summary>
         /// The endpoint of the cpus rest api. 

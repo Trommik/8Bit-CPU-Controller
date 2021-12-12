@@ -27,7 +27,7 @@
         {
             return $"0x{Value:X2}";
         }
-        
+
         /// <inheritdoc />
         public byte[] ToBinary()
         {

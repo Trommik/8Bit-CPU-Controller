@@ -14,11 +14,8 @@ namespace CPUController.UI.ViewModels
         public CpuMode Mode { get; set; }
 
         [UsedImplicitly]
-        private void OnModeChanged()
-        {
-            
-        }
-        
+        private void OnModeChanged() { }
+
         /// <summary>
         /// True when the <see cref="Mode"/> is <see cref="CpuMode.LoadCode"/>.
         /// </summary>
@@ -27,8 +24,8 @@ namespace CPUController.UI.ViewModels
         {
             get => Mode == CpuMode.LoadCode;
             set => Mode = value ? CpuMode.LoadCode : CpuMode.None;
-        } 
-        
+        }
+
         /// <summary>
         /// True when the <see cref="Mode"/> is <see cref="CpuMode.Execute"/>.
         /// </summary>
@@ -43,6 +40,5 @@ namespace CPUController.UI.ViewModels
         /// True when the cpu is connected else false. 
         /// </summary>
         public bool IsConnected { get; set; }
-        
     }
 }

@@ -17,7 +17,7 @@ namespace CPUController
 
             // Strip all '0x' from the hex values
             parts = parts.Select(p => p.Trim().Replace("0x", string.Empty)).ToArray();
-            
+
             // Check if the given value or string is a opcode
             if (EnumExtension.Contains<OpCode>(parts[0]))
             {
@@ -35,7 +35,7 @@ namespace CPUController
 
                 return opCodeInstruction;
             }
-            
+
             // Pares and return the value instruction
             return new ValueInstruction
             {

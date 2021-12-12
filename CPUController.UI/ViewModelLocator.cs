@@ -37,6 +37,5 @@ namespace CPUController.UI
         public OutputRegisterViewModel OutputRegisterVm => _outputRegisterVm ??= Bootstrapper.Instance.Container.Resolve<OutputRegisterViewModel>();
 
         #endregion
-
     }
 }

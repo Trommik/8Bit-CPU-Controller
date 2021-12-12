@@ -18,30 +18,30 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />                
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Endpoint [url]:" FontWeight="Bold"
                        VerticalAlignment="Center" Margin="5 1" />
-            
-            <ScrollViewer Grid.Row="0" Grid.Column="1" x:Name="ScrollViewerEndpoint" 
+
+            <ScrollViewer Grid.Row="0" Grid.Column="1" x:Name="ScrollViewerEndpoint"
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-                <TextBox Text="{Binding Endpoint}" 
-                         MaxWidth="{Binding ElementName=ScrollViewerEndpoint, Path=ActualWidth}" 
+                <TextBox Text="{Binding Endpoint}"
+                         MaxWidth="{Binding ElementName=ScrollViewerEndpoint, Path=ActualWidth}"
                          HorizontalAlignment="Stretch" Margin="0 2" />
             </ScrollViewer>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Refresh Rate [ms]:" FontWeight="Bold"
                        VerticalAlignment="Center" Margin="5 1" />
-            
-            <ScrollViewer Grid.Row="1" Grid.Column="1" x:Name="ScrollViewerRefreshRate" 
+
+            <ScrollViewer Grid.Row="1" Grid.Column="1" x:Name="ScrollViewerRefreshRate"
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-                <TextBox Text="{Binding RefreshRate}" 
-                         MaxWidth="{Binding ElementName=ScrollViewerRefreshRate, Path=ActualWidth}" 
+                <TextBox Text="{Binding RefreshRate}"
+                         MaxWidth="{Binding ElementName=ScrollViewerRefreshRate, Path=ActualWidth}"
                          HorizontalAlignment="Stretch" Margin="0 2" />
             </ScrollViewer>
-            
+
             <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Rows="1" Columns="2">
                 <Button Content="Load" Command="{Binding LoadCommand}" />
                 <Button Content="Save" Command="{Binding SaveCommand}" />

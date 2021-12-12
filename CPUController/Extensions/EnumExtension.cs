@@ -8,7 +8,7 @@ namespace CPUController.Extensions
         {
             return Enum.IsDefined(typeof(TEnum), enumValue);
         }
-        
+
         internal static bool Contains<TEnum>(string enumValue)
         {
             return Enum.IsDefined(typeof(TEnum), enumValue);

@@ -9,13 +9,13 @@ namespace CPUController.DataAccess
 {
     public class CpuControllerClient : ICpuControllerClient
     {
-        private readonly HttpClient _client = new ();
+        private readonly HttpClient _client = new();
 
         private readonly JsonSerializerOptions _jsonOptions = new()
         {
             PropertyNameCaseInsensitive = true,
         };
-        
+
         /// <summary>
         /// Initializes a new <see cref="CpuControllerClient"/> for the given <paramref name="endpoint"/>.
         /// </summary>
@@ -23,7 +23,7 @@ namespace CPUController.DataAccess
         public CpuControllerClient(string endpoint)
         {
             _client.BaseAddress = new Uri(endpoint);
-            
+
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -32,7 +32,7 @@ namespace CPUController.DataAccess
         public async Task<bool> CheckConnection()
         {
             HttpResponseMessage response = await _client.GetAsync(string.Empty);
-          
+
             string data = await response.Content.ReadAsStringAsync();
 
             return data.Equals("8-Bit CPU REST API v1");
@@ -42,17 +42,17 @@ namespace CPUController.DataAccess
         public async Task<CpuModeResponse> GetMode()
         {
             HttpResponseMessage response = await _client.GetAsync("/mode");
-          
+
             string data = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<CpuModeResponse>(data, _jsonOptions) ?? throw new NullReferenceException("Could not deserialize object!"); 
+            return JsonSerializer.Deserialize<CpuModeResponse>(data, _jsonOptions) ?? throw new NullReferenceException("Could not deserialize object!");
         }
 
         /// <inheritdoc />
         public async Task<CpuCodeResponse> GetCodeStatus()
         {
             HttpResponseMessage response = await _client.GetAsync("/code");
-          
+
             string data = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<CpuCodeResponse>(data, _jsonOptions) ?? throw new NullReferenceException("Could not deserialize object!");
@@ -62,7 +62,7 @@ namespace CPUController.DataAccess
         public async Task<CpuControlWordResponse> GetControlWord()
         {
             HttpResponseMessage response = await _client.GetAsync("/controlword");
-          
+
             string data = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<CpuControlWordResponse>(data, _jsonOptions) ?? throw new NullReferenceException("Could not deserialize object!");
@@ -72,7 +72,7 @@ namespace CPUController.DataAccess
         public async Task<CpuInstructionResponse> GetInstructionStatus()
         {
             HttpResponseMessage response = await _client.GetAsync("/instruction");
-          
+
             string data = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<CpuInstructionResponse>(data, _jsonOptions) ?? throw new NullReferenceException("Could not deserialize object!");
@@ -89,9 +89,9 @@ namespace CPUController.DataAccess
         public async Task SetCode(byte[] code)
         {
             HttpResponseMessage response = await _client.PostAsJsonAsync("/code", code);
-            response.EnsureSuccessStatusCode();        
+            response.EnsureSuccessStatusCode();
         }
-        
+
         /// <inheritdoc />
         public async Task Reset()
         {

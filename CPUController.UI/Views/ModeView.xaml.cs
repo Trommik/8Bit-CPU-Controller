@@ -1,5 +1,4 @@
-﻿
-namespace CPUController.UI.Views
+﻿namespace CPUController.UI.Views
 {
     public partial class ModeView
     {

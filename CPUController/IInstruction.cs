@@ -6,7 +6,7 @@
         /// The memory address of the instruction. 
         /// </summary>
         byte Address { get; set; }
-        
+
         /// <summary>
         /// The memory value of the instruction. 
         /// </summary>
