@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -86,9 +87,11 @@ namespace CPUController.DataAccess
         }
 
         /// <inheritdoc />
-        public async Task SetCode(byte[] code)
+        public async Task SetCode(IEnumerable<byte> code)
         {
-            HttpResponseMessage response = await _client.PostAsJsonAsync("/code", code);
+            var content = new StringContent(JsonSerializer.Serialize(code), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await _client.PostAsync("/code", content);
             response.EnsureSuccessStatusCode();
         }
 

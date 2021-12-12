@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CPUController.DataAccess
@@ -45,7 +46,7 @@ namespace CPUController.DataAccess
         /// Sets the cpu code to the given <paramref name="code"/>.
         /// </summary>
         /// <param name="code">The code to send to the cpu. </param>
-        Task SetCode(byte[] code);
+        Task SetCode(IEnumerable<byte> code);
 
         /// <summary>
         /// Resets the cpu. 
