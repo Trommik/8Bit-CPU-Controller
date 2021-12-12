@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
-
-using JetBrains.Annotations;
 
 namespace CPUController.UI.MVVM
 {
     /// <summary>
     /// A command whose sole purpose is to relay its functionality to other objects by invoking
-    /// delegates. The default return value for the CanExecute method is 'true'. This class allow
-    /// you to accept command parameters in the Execute and CanExecute callback methods.
+    /// delegates. The default return value for the CanExecute method is 'true'. This class does not
+    /// allow you to accept command parameters in the Execute and CanExecute callback methods.
     /// </summary>
-    public class RelayCommand<T> : ICommand, ICanExecuteCommand
+    public class AsyncRelayCommand : ICommand, ICanExecuteCommand
     {
-        private readonly Action<T> _execute;
-        private readonly Predicate<T> _canExecute;
+        private long _isExecuting;
+
+        private readonly Func<Task> _execute;
+        private readonly Func<bool> _canExecute;
 
         /// <summary>
         /// Initializes a new instance of the RelayCommand class. If canExecute is null it can
@@ -22,10 +24,10 @@ namespace CPUController.UI.MVVM
         /// </summary>
         /// <param name="execute"> The execution logic. </param>
         /// <param name="canExecute"> The execution status logic. </param>
-        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
+        public AsyncRelayCommand(Func<Task> execute, Func<bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
+            _canExecute = canExecute ?? (() => true);
         }
 
         #region ICommand Members
@@ -38,7 +40,7 @@ namespace CPUController.UI.MVVM
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return _canExecute?.Invoke((T)parameter) ?? true;
+            return Interlocked.Read(ref _isExecuting) == 0 && _canExecute();
         }
 
         /// <summary>
@@ -53,7 +55,6 @@ namespace CPUController.UI.MVVM
         /// <summary>
         /// Raises the <see cref="CanExecuteChanged" /> event.
         /// </summary>
-        [UsedImplicitly]
         public void RaiseCanExecuteChanged()
         {
             CommandManager.InvalidateRequerySuggested();
@@ -63,9 +64,18 @@ namespace CPUController.UI.MVVM
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter"> This parameter will always be ignored. </param>
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
-            _execute((T)parameter);
+            Interlocked.Exchange(ref _isExecuting, 1);
+
+            try
+            {
+                await _execute();
+            }
+            finally
+            {
+                Interlocked.Exchange(ref _isExecuting, 0);
+            }
         }
 
         #endregion ICommand Members
