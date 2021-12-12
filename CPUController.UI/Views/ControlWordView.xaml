@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:ControlWordViewModel}"
-             VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"
+             VerticalAlignment="Center" HorizontalAlignment="Center"
              DataContext="{Binding ControlWordVm, Source={StaticResource ViewModelLocator}}">
 
     <UserControl.Resources>
@@ -15,7 +15,7 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical">
-        <GroupBox Header="Control Word:">
+        <GroupBox Header="Control Word:" Margin="5">
             <UniformGrid Rows="2" Columns="8">
                 <ToggleButton Content="HLT" IsChecked="{Binding HLT}" IsEnabled="False"
                               ToolTip="Stops the clock and halts the CPU" />
@@ -51,7 +51,7 @@
                               ToolTip="Address three of output register demux" />
             </UniformGrid>
         </GroupBox>
-        <GroupBox Header="Output Register:">
+        <GroupBox Header="Output Register:" Margin="5">
             <UniformGrid Rows="1" Columns="8">
                 <ToggleButton Content="" IsChecked="{Binding OFF}" IsEnabled="False" />
                 <ToggleButton Content="PCO" IsChecked="{Binding PCO}" IsEnabled="False"

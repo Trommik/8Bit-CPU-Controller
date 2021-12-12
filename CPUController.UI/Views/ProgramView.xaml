@@ -8,10 +8,10 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:ProgramViewModel}"
-             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
              DataContext="{Binding ProgramVm, Source={StaticResource ViewModelLocator}}">
 
-    <GroupBox Header="Program">
+    <GroupBox Header="Program" Margin="5">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

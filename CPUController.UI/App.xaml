@@ -24,9 +24,12 @@
 
             <!-- Custom Button Style  -->
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button}">
+                <Setter Property="FontSize" Value="11" />
                 <Setter Property="BorderThickness" Value="0" />
+                
                 <Setter Property="mah:ControlsHelper.CornerRadius" Value="0" />
                 <Setter Property="mah:ControlsHelper.FocusBorderThickness" Value="0" />
+                <Setter Property="mah:ControlsHelper.ContentCharacterCasing" Value="Normal" />
             </Style>
 
             <!-- Custom ToggleButton Style  -->
@@ -35,8 +38,6 @@
                 <Setter Property="Width" Value="40" />
                 <Setter Property="Height" Value="30" />
                 
-                <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
-
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Button.Border}" />
                 <Setter Property="BorderThickness" Value="0" />
@@ -89,6 +90,7 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
                 <Setter Property="mah:ControlsHelper.CornerRadius" Value="0" />
                 <Setter Property="mah:ControlsHelper.FocusBorderBrush"
                         Value="{DynamicResource MahApps.Brushes.Button.Border.Focus}" />
@@ -121,8 +123,8 @@
 
             <!-- Custom GroupBox Style -->
             <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource MahApps.Styles.GroupBox}">
-                <Setter Property="mah:HeaderedControlHelper.HeaderFontWeight" Value="Bold" />
                 <Setter Property="mah:ControlsHelper.ContentCharacterCasing" Value="Normal" />
+                <Setter Property="mah:HeaderedControlHelper.HeaderFontWeight" Value="Bold" />
             </Style>
 
         </ResourceDictionary>

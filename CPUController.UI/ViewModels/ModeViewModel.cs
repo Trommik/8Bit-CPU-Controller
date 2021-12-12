@@ -1,4 +1,6 @@
-﻿using System.Windows.Markup;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Markup;
 
 using CPUController.Services;
 using CPUController.UI.MVVM;
@@ -69,5 +71,16 @@ namespace CPUController.UI.ViewModels
             
             IsReachable = e.IsReachable;
         }
+
+        /// <summary>
+        /// Command to reset the cpu. 
+        /// </summary>
+        public ICommand ResetCpuCommand => new AsyncRelayCommand(ResetCpu);
+
+        private async Task ResetCpu()
+        {
+            await _cpuControllerService.CpuClient.Reset();
+        }
+
     }
 }

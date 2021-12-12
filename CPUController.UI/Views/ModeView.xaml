@@ -8,31 +8,39 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:ModeViewModel}"
-             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5"
+             VerticalAlignment="Center" HorizontalAlignment="Stretch"
              DataContext="{Binding ModeVm, Source={StaticResource ViewModelLocator}}">
 
     <UserControl.Resources>
         <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource LampToggleButtonStyle}" />
     </UserControl.Resources>
 
-    <GroupBox Header="Mode:">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <UniformGrid Grid.Row="0" Rows="1" Columns="2" Margin="5 10 5 15">
-                <TextBlock Text="Is CPU server reachable:" FontWeight="Bold" HorizontalAlignment="Center" />
-                <TextBlock Text="{Binding IsReachable}" FontWeight="Bold" HorizontalAlignment="Center" />
-            </UniformGrid>
-
-            <UniformGrid Grid.Row="1" Rows="1" Columns="2">
-                <ToggleButton Content="Load Program" Height="40" Width="{x:Static sys:Double.NaN}"
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="Status:" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <UniformGrid Grid.Row="0" Rows="1" Columns="2" Margin="5 10 5 15">
+                    <TextBlock Text="Is CPU server reachable:" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding IsReachable}" FontWeight="Bold" HorizontalAlignment="Center" />
+                </UniformGrid>
+                
+                <Button Grid.Row="1" Content="Reset CPU" Height="30" Command="{Binding ResetCpuCommand}" />
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox Header="Mode:" Margin="5">
+            <UniformGrid Rows="1" Columns="2">
+                <ToggleButton Content="Load Program" Height="30" Width="{x:Static sys:Double.NaN}"
                               FontSize="11" IsChecked="{Binding LoadCode}" />
-                <ToggleButton Content="Execute Program" Height="40" Width="{x:Static sys:Double.NaN}"
+                <ToggleButton Content="Execute Program" Height="30" Width="{x:Static sys:Double.NaN}"
                               FontSize="11" IsChecked="{Binding Execute}" />
             </UniformGrid>
-        </Grid>
-    </GroupBox>
+        </GroupBox>
+    </StackPanel>
+    
 </UserControl>
