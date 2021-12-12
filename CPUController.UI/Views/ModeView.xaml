@@ -28,9 +28,9 @@
             
             <UniformGrid Grid.Row="1" Rows="1" Columns="2">
                 <ToggleButton Content="Load Program" Height="40" Width="{x:Static sys:Double.NaN}"
-                              IsChecked="{Binding LoadCode}"/>
+                              FontSize="11" IsChecked="{Binding LoadCode}" />
                 <ToggleButton Content="Execute Program" Height="40" Width="{x:Static sys:Double.NaN}" 
-                              IsChecked="{Binding Execute}"/>
+                              FontSize="11" IsChecked="{Binding Execute}" />
             </UniformGrid>
         </Grid>
     </GroupBox>
