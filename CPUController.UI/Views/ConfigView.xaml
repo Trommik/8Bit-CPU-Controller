@@ -10,7 +10,7 @@
              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
              DataContext="{Binding ConfigVm, Source={StaticResource ViewModelLocator}}">
 
-    <GroupBox Header="CPU Config:">
+    <GroupBox Header="Config:">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

@@ -15,7 +15,7 @@
         <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource LampToggleButtonStyle}" />
     </UserControl.Resources>
 
-    <GroupBox Header="CPU Mode:">
+    <GroupBox Header="Mode:">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
