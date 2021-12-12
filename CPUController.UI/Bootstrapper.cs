@@ -1,6 +1,5 @@
-﻿using CPUController.UI.ViewModels;
-
-using NLog;
+﻿using CPUController.Services;
+using CPUController.UI.ViewModels;
 
 using Unity;
 
@@ -27,6 +26,9 @@ namespace CPUController.UI
         private Bootstrapper()
         {
             var container = new UnityContainer();
+
+            // Register all services 
+            container.RegisterSingleton<ICpuControllerService, CpuControllerService>();
 
             // Register all view models
             container.RegisterType<MainViewModel>();
