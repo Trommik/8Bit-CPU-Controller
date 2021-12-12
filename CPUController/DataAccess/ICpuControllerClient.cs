@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace CPUController.DataAccess
 {
-    public interface ICpuControllerClient
+    public interface ICpuControllerClient : IDisposable
     {
         /// <summary>
         /// Checks the connection and returns true when the connection is successful. 

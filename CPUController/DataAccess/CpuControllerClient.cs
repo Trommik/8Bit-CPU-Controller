@@ -98,5 +98,11 @@ namespace CPUController.DataAccess
             HttpResponseMessage response = await _client.PostAsync("/reset", null!);
             response.EnsureSuccessStatusCode();
         }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            _client.Dispose();
+        }
     }
 }
