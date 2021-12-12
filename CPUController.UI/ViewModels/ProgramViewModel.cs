@@ -3,8 +3,10 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
+using CPUController.Services;
 using CPUController.UI.Extensions;
 using CPUController.UI.MVVM;
 
@@ -14,6 +16,10 @@ namespace CPUController.UI.ViewModels
 {
     public class ProgramViewModel : ViewModelBase
     {
+        private readonly ICpuControllerService _cpuControllerService;
+
+        #region Properties
+
         /// <summary>
         /// The current selected <see cref="IInstructionViewModel"/> from the <see cref="Instructions"/> collection. 
         /// </summary>
@@ -24,8 +30,13 @@ namespace CPUController.UI.ViewModels
         /// </summary>
         public ObservableCollection<IInstructionViewModel> Instructions { get; set; } = new();
 
-        public ProgramViewModel()
+        #endregion
+
+        public ProgramViewModel(ICpuControllerService cpuControllerService)
         {
+            _cpuControllerService = cpuControllerService;
+
+            // Initialize the Instructions collection and hookup the memory size changed event
             Instructions.CollectionChanged += (s, e) =>
             {
                 if (e.OldItems?.Count > 0)
@@ -60,6 +71,8 @@ namespace CPUController.UI.ViewModels
                 }
             }
         }
+
+        #region Commands
 
         public ICommand SaveCommand => new RelayCommand(Save);
 
@@ -183,5 +196,21 @@ namespace CPUController.UI.ViewModels
 
             Instructions.Add(newInstruction.AsViewModel());
         }
+
+        /// <summary>
+        /// Command to upload the current <see cref="Instructions"/> to the cpu. 
+        /// </summary>
+        public ICommand UploadToCpuCommand => new AsyncRelayCommand(UploadToCpu, CanUploadToCpu);
+
+        private bool CanUploadToCpu() => Instructions.Any();
+
+        private async Task UploadToCpu()
+        {
+            var binaries = Instructions.SelectMany(vm => vm.Instruction.ToBinary());
+
+            await _cpuControllerService.CpuClient.SetCode(binaries);
+        }
+
+        #endregion
     }
 }

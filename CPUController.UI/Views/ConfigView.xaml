@@ -42,9 +42,9 @@
                          HorizontalAlignment="Stretch" Margin="0 2" />
             </ScrollViewer>
 
-            <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Rows="1" Columns="2">
-                <Button Content="Load" Command="{Binding LoadCommand}" />
-                <Button Content="Save" Command="{Binding SaveCommand}" />
+            <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Rows="1" Columns="2" Margin="0 5 0 0">
+                <Button Content="Load" Height="30" Command="{Binding LoadCommand}" />
+                <Button Content="Save" Height="30" Command="{Binding SaveCommand}" />
             </UniformGrid>
         </Grid>
     </GroupBox>

@@ -2,7 +2,10 @@
 using System.Text.Json;
 using System.Windows.Input;
 
+using CPUController.Services;
 using CPUController.UI.MVVM;
+
+using JetBrains.Annotations;
 
 using PropertyChanged;
 
@@ -11,6 +14,10 @@ namespace CPUController.UI.ViewModels
     public class ConfigViewModel : ViewModelBase
     {
         private const string DefaultConfigPath = "config.json";
+
+        private readonly ICpuControllerService _cpuControllerService;
+
+        #region Properties
 
         /// <summary>
         /// The current loaded config. 
@@ -27,6 +34,12 @@ namespace CPUController.UI.ViewModels
             set => Config.Endpoint = value;
         }
 
+        [UsedImplicitly]
+        private void OnEndpointChanged()
+        {
+            _cpuControllerService.SetEndpoint(Config.Endpoint);
+        }
+
         /// <summary>
         /// The refresh rate in milliseconds.
         /// </summary>
@@ -37,13 +50,25 @@ namespace CPUController.UI.ViewModels
             set => Config.RefreshRate = value;
         }
 
+        [UsedImplicitly]
+        private void OnRefreshRateChanged()
+        {
+            _cpuControllerService.SetRefreshRate(Config.RefreshRate);
+        }
+
+        #endregion
+
         /// <summary>
         /// Initializes a new <see cref="ConfigViewModel"/> and loads the <see cref="Config"/> from the <see cref="DefaultConfigPath"/>.
         /// </summary>
-        public ConfigViewModel()
+        public ConfigViewModel(ICpuControllerService cpuControllerService)
         {
+            _cpuControllerService = cpuControllerService;
+
             Load();
         }
+
+        #region Commands
 
         /// <summary>
         /// Command to save the <see cref="Config"/> to the <see cref="DefaultConfigPath"/>.
@@ -64,5 +89,7 @@ namespace CPUController.UI.ViewModels
         {
             Config = JsonSerializer.Deserialize<Config>(File.ReadAllText(DefaultConfigPath));
         }
+
+        #endregion
     }
 }

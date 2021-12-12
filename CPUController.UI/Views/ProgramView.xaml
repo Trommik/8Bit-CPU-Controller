@@ -23,10 +23,11 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Content="Load" Command="{Binding LoadCommand}" />
-            <Button Grid.Row="0" Grid.Column="1" Content="Save" Command="{Binding SaveCommand}" />
+            <Button Grid.Row="0" Grid.Column="0" Content="Load" Height="30" Command="{Binding LoadCommand}" />
+            <Button Grid.Row="0" Grid.Column="1" Content="Save" Height="30" Command="{Binding SaveCommand}" />
 
             <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                      Margin="3 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
@@ -43,10 +44,16 @@
                 </ListBox.Resources>
             </ListBox>
 
-            <Button Grid.Row="2" Grid.Column="1" Content="Delete" Command="{Binding DeleteInstructionCommand}" />
+            <Button Grid.Row="2" Grid.Column="1" Content="Delete" Height="30"
+                    Command="{Binding DeleteInstructionCommand}" />
 
-            <Button Grid.Row="3" Grid.Column="0" Content="Add Instruction" Command="{Binding AddInstructionCommand}" />
-            <Button Grid.Row="3" Grid.Column="1" Content="Add Value" Command="{Binding AddValueCommand}" />
+            <Button Grid.Row="3" Grid.Column="0" Content="Add Instruction" Height="30"
+                    Command="{Binding AddInstructionCommand}" />
+            <Button Grid.Row="3" Grid.Column="1" Content="Add Value" Height="30"
+                    Command="{Binding AddValueCommand}" />
+
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Upload to CPU" Height="30"
+                    Command="{Binding UploadToCpuCommand}" />
         </Grid>
     </GroupBox>
 </UserControl>

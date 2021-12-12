@@ -23,8 +23,8 @@
             </Grid.RowDefinitions>
 
             <UniformGrid Grid.Row="0" Rows="1" Columns="2" Margin="5 10 5 15">
-                <TextBlock Text="Connected to CPU:" FontWeight="Bold" HorizontalAlignment="Center" />
-                <TextBlock Text="{Binding IsConnected}" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="Is CPU server reachable:" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding IsReachable}" FontWeight="Bold" HorizontalAlignment="Center" />
             </UniformGrid>
 
             <UniformGrid Grid.Row="1" Rows="1" Columns="2">
