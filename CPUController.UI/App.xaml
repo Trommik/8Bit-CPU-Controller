@@ -34,6 +34,8 @@
 
                 <Setter Property="Width" Value="40" />
                 <Setter Property="Height" Value="30" />
+                
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
 
                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Button.Border}" />
@@ -79,10 +81,10 @@
                                     <Setter TargetName="Border" Property="BorderBrush"
                                             Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(mah:ControlsHelper.MouseOverBorderBrush), Mode=OneWay}" />
                                 </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="0.7" />
-                                    <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="0.3" />
-                                </Trigger>
+                                <!-- <Trigger Property="IsEnabled" Value="False"> -->
+                                <!--     <Setter TargetName="DisabledVisualElement" Property="Opacity" Value="0.7" /> -->
+                                <!--     <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="0.3" /> -->
+                                <!-- </Trigger> -->
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
