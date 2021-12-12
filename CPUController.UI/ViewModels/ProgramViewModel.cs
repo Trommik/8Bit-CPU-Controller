@@ -134,7 +134,19 @@ namespace CPUController.UI.ViewModels
                 Instructions.Add(instruction.AsViewModel());
             }
         }
+        
+        /// <summary>
+        /// Command to clear the <see cref="Instructions"/> collection.
+        /// </summary>
+        public ICommand ClearInstructionsCommand => new RelayCommand(ClearInstructions, CanClearInstructions);
 
+        private bool CanClearInstructions() => Instructions.Any();
+
+        private void ClearInstructions()
+        {
+            Instructions.Clear();
+        }
+        
         /// <summary>
         /// Command to delete the current <see cref="SelectedInstruction"/> from the <see cref="Instructions"/> collection.
         /// </summary>

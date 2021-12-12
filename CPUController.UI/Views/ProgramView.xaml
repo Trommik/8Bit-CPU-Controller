@@ -44,6 +44,8 @@
                 </ListBox.Resources>
             </ListBox>
 
+            <Button Grid.Row="2" Grid.Column="0" Content="Clear" Height="30"
+                    Command="{Binding ClearInstructionsCommand}" />
             <Button Grid.Row="2" Grid.Column="1" Content="Delete" Height="30"
                     Command="{Binding DeleteInstructionCommand}" />
 
