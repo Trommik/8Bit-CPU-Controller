@@ -16,8 +16,8 @@
                     Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- The MainViewModel as DataContext -->
-            <ui:MainViewModel x:Key="MainViewModel" />
+            <!-- The ViewModelLocator for MVVM -->
+            <ui:ViewModelLocator x:Key="ViewModelLocator" />
 
             <!-- Value Converters -->
             <valueConverter:HexStringConverter x:Key="HexConverter" />

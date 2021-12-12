@@ -6,6 +6,7 @@
         xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:StatusViewModel}"
+        DataContext="{Binding StatusVm, Source={StaticResource ViewModelLocator}}"
         MinWidth="400" MinHeight="300"
         Closing="StatusMessageWindow_OnClosing"
         Title="8-Bit CPU Controller - Status Messages" Height="450" Width="800">

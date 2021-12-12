@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 
+using CPUController.DataAccess;
 using CPUController.UI.MVVM;
 using CPUController.UI.ViewModels;
 
@@ -9,18 +10,23 @@ namespace CPUController.UI
 {
     public class MainViewModel : ViewModelBase
     {
-        public bool Connected { get; set; }
+        public MainViewModel()
+        {
+            Test();
+        }
 
-        public ControlWordViewModel ControlWordViewModel { get; } = new();
-
-        public OutputRegisterViewModel OutputRegisterViewModel { get; } = new();
-
-        public ConfigViewModel ConfigViewModel { get; } = new();
-
-        public ProgramViewModel ProgramViewModel { get; } = new();
-
-        public ModeViewModel ModeViewModel { get; } = new();
-        
-        public MainViewModel() { }
+        private async void Test()
+        {
+            var client = new CpuControllerClient("http://192.168.2.50/");
+            
+            var connection = await client.CheckConnection();
+            
+            var instr = await client.GetInstructionStatus();
+            var mode = await client.GetMode();
+            var code = await client.GetCodeStatus();
+            var controlWord = await client.GetControlWord();
+            
+            await client.Reset();
+        }
     }
 }

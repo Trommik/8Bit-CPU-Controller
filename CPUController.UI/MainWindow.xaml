@@ -8,29 +8,20 @@
                  xmlns:ui="clr-namespace:CPUController.UI"
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance ui:MainViewModel}"
-                 DataContext="{StaticResource MainViewModel}"
+                 DataContext="{Binding MainVm, Source={StaticResource ViewModelLocator}}"
                  Title="8-Bit CPU Controller"
                  MinHeight="450" MinWidth="600"
                  Height="500" Width="800" TitleCharacterCasing="Normal">
 
     <DockPanel Margin="5">
-
-        <ScrollViewer DockPanel.Dock="Left" 
-                      HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer DockPanel.Dock="Left" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
-                
-                <views:ModeView DataContext="{Binding ModeViewModel}" />
-            
-                <views:ControlWordView DataContext="{Binding ControlWordViewModel}" />
-                <views:OutputRegisterView DataContext="{Binding OutputRegisterViewModel}" />
-            
-                <views:ConfigView DataContext="{Binding ConfigViewModel}" />
-                
+                <views:ModeView />
+                <views:ControlWordView />
+                <views:OutputRegisterView />
+                <views:ConfigView />
             </StackPanel>
-
         </ScrollViewer>
-       
-        <views:ProgramView DockPanel.Dock="Top" DataContext="{Binding ProgramViewModel}" />
-
+        <views:ProgramView DockPanel.Dock="Top" />
     </DockPanel>
 </mah:MetroWindow>
