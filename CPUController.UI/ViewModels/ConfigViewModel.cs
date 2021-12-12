@@ -1,8 +1,10 @@
 ﻿using System.IO;
 using System.Text.Json;
-using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 using CPUController.UI.MVVM;
+
+using PropertyChanged;
 
 namespace CPUController.UI.ViewModels
 {
@@ -10,34 +12,57 @@ namespace CPUController.UI.ViewModels
     {
         private const string DefaultConfigPath = "config.json";
 
-        private readonly Config _config;
+        /// <summary>
+        /// The current loaded config. 
+        /// </summary>
+        public  Config Config { get; set; }
 
         /// <summary>
         /// The endpoint of the cpus rest api. 
         /// </summary>
+        [DependsOn(nameof(Config))]
         public string Endpoint
         {
-            get => _config.Endpoint;
-            set => _config.Endpoint = value;
+            get => Config.Endpoint;
+            set => Config.Endpoint = value;
         }
 
         /// <summary>
         /// The refresh rate in milliseconds.
         /// </summary>
+        [DependsOn(nameof(Config))]
         public int RefreshRate
         {
-            get => _config.RefreshRate;
-            set => _config.RefreshRate = value;
+            get => Config.RefreshRate;
+            set => Config.RefreshRate = value;
         }
 
+        /// <summary>
+        /// Initializes a new <see cref="ConfigViewModel"/> and loads the <see cref="Config"/> from the <see cref="DefaultConfigPath"/>.
+        /// </summary>
         public ConfigViewModel()
         {
-            _config = JsonSerializer.Deserialize<Config>(File.ReadAllText(DefaultConfigPath));
+            Load();
         }
 
-        public ConfigViewModel(Config config)
+        /// <summary>
+        /// Command to save the <see cref="Config"/> to the <see cref="DefaultConfigPath"/>.
+        /// </summary>
+        public ICommand SaveCommand => new RelayCommand(Save);
+
+        private void Save()
         {
-            _config = config;
+            File.WriteAllText(DefaultConfigPath, JsonSerializer.Serialize(Config));
+        }
+
+        /// <summary>
+        /// Command to load the <see cref="Config"/> from the <see cref="DefaultConfigPath"/>.
+        /// </summary>
+        public ICommand LoadCommand => new RelayCommand(Load);
+
+        private void Load()
+        {
+            Config = JsonSerializer.Deserialize<Config>(File.ReadAllText(DefaultConfigPath));
         }
     }
 }

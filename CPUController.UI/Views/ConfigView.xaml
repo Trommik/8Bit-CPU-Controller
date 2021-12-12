@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5"
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5"
              d:DataContext="{d:DesignInstance viewModels:ConfigViewModel}">
 
     <GroupBox Header="CPU Config:">
@@ -17,6 +17,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />                
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -24,21 +25,26 @@
                        VerticalAlignment="Center" Margin="5 1" />
             
             <ScrollViewer Grid.Row="0" Grid.Column="1" x:Name="ScrollViewerEndpoint" 
-                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" >
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
                 <TextBox Text="{Binding Endpoint}" 
                          MaxWidth="{Binding ElementName=ScrollViewerEndpoint, Path=ActualWidth}" 
-                         HorizontalAlignment="Stretch" />
+                         HorizontalAlignment="Stretch" Margin="0 2" />
             </ScrollViewer>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Refresh Rate [ms]:" FontWeight="Bold"
                        VerticalAlignment="Center" Margin="5 1" />
             
             <ScrollViewer Grid.Row="1" Grid.Column="1" x:Name="ScrollViewerRefreshRate" 
-                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" >
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
                 <TextBox Text="{Binding RefreshRate}" 
                          MaxWidth="{Binding ElementName=ScrollViewerRefreshRate, Path=ActualWidth}" 
-                         HorizontalAlignment="Stretch"/>
+                         HorizontalAlignment="Stretch" Margin="0 2" />
             </ScrollViewer>
+            
+            <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Rows="1" Columns="2">
+                <Button Content="Load" Command="{Binding LoadCommand}" />
+                <Button Content="Save" Command="{Binding SaveCommand}" />
+            </UniformGrid>
         </Grid>
     </GroupBox>
 </UserControl>
