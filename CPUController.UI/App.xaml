@@ -94,7 +94,7 @@
                         Value="{DynamicResource MahApps.Brushes.Button.Border.MouseOver}" />
                 <Style.Triggers>
                     <Trigger Property="IsChecked" Value="True">
-                        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+                        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
                         <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray5}" />
                     </Trigger>
                     <MultiTrigger>
