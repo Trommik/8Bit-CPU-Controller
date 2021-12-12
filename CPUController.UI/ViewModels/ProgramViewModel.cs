@@ -74,8 +74,10 @@ namespace CPUController.UI.ViewModels
 
         #region Commands
 
-        public ICommand SaveCommand => new RelayCommand(Save);
+        public ICommand SaveCommand => new RelayCommand(Save, CanSave);
 
+        private bool CanSave() => Instructions.Any();
+        
         private void Save()
         {
             var saveFileDialog = new SaveFileDialog()
