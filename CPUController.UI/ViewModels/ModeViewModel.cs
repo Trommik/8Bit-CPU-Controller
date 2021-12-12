@@ -59,8 +59,6 @@ namespace CPUController.UI.ViewModels
 
         private async void CpuControllerServiceOnRefresh(object? sender, CpuControllerRefreshEventArgs e)
         {
-            IsReachable = e.IsReachable;
-
             var modeResponse = await e.Client.GetMode();
             if (modeResponse.LoadCodeMode)
                 Mode = CpuMode.LoadCode;
@@ -68,6 +66,8 @@ namespace CPUController.UI.ViewModels
                 Mode = CpuMode.Execute;
             else
                 Mode = CpuMode.None;
+            
+            IsReachable = e.IsReachable;
         }
     }
 }

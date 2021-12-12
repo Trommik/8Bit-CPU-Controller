@@ -140,7 +140,7 @@ namespace CPUController.UI.ViewModels
         /// </summary>
         public ICommand DeleteInstructionCommand => new RelayCommand(DeleteInstruction, CanDeleteInstruction);
 
-        private bool CanDeleteInstruction() => Instructions.Any();
+        private bool CanDeleteInstruction() => SelectedInstruction != null;
 
         private void DeleteInstruction()
         {
