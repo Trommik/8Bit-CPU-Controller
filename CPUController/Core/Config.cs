@@ -1,4 +1,4 @@
-﻿namespace CPUController
+﻿namespace CPUController.Core
 {
     public class Config
     {

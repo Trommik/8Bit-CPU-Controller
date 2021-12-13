@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using CPUController.Core;
+
 namespace CPUController.DataAccess
 {
     public interface ICpuControllerClient : IDisposable

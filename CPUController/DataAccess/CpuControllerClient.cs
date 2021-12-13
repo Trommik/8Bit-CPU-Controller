@@ -6,6 +6,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+using CPUController.Core;
+
 namespace CPUController.DataAccess
 {
     public class CpuControllerClient : ICpuControllerClient

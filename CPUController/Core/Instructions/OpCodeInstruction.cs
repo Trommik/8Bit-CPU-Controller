@@ -1,6 +1,6 @@
 ﻿using CPUController.Extensions;
 
-namespace CPUController
+namespace CPUController.Core.Instructions
 {
     public class OpCodeInstruction : IInstruction
     {

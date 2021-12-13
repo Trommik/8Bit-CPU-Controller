@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+using CPUController.Core;
+using CPUController.Core.Instructions;
 using CPUController.Services;
 using CPUController.UI.Extensions;
 using CPUController.UI.MVVM;
@@ -21,14 +23,14 @@ namespace CPUController.UI.ViewModels
         #region Properties
 
         /// <summary>
-        /// The current selected <see cref="IInstructionViewModel"/> from the <see cref="Instructions"/> collection. 
+        /// The current selected <see cref="InstructionViewModelBase"/> from the <see cref="Instructions"/> collection. 
         /// </summary>
-        public IInstructionViewModel SelectedInstruction { get; set; }
+        public InstructionViewModelBase SelectedInstruction { get; set; }
 
         /// <summary>
-        /// All current <see cref="IInstructionViewModel"/> instances.
+        /// All current <see cref="InstructionViewModelBase"/> instances.
         /// </summary>
-        public ObservableCollection<IInstructionViewModel> Instructions { get; set; } = new();
+        public ObservableCollection<InstructionViewModelBase> Instructions { get; set; } = new();
 
         #endregion
 
@@ -40,11 +42,11 @@ namespace CPUController.UI.ViewModels
             Instructions.CollectionChanged += (s, e) =>
             {
                 if (e.OldItems?.Count > 0)
-                    foreach (IInstructionViewModel oldItem in e.OldItems)
+                    foreach (InstructionViewModelBase oldItem in e.OldItems)
                         oldItem.MemorySizeChanged -= Instruction_MemorySizeChanged;
 
                 if (e.NewItems?.Count > 0)
-                    foreach (IInstructionViewModel newItem in e.NewItems)
+                    foreach (InstructionViewModelBase newItem in e.NewItems)
                         newItem.MemorySizeChanged += Instruction_MemorySizeChanged;
 
                 Instruction_MemorySizeChanged(s, EventArgs.Empty);

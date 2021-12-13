@@ -1,4 +1,4 @@
-﻿namespace CPUController
+﻿namespace CPUController.Core.Instructions
 {
     public class ValueInstruction : IInstruction
     {

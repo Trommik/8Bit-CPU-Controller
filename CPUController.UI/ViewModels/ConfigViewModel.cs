@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Windows.Input;
 
+using CPUController.Core;
 using CPUController.Services;
 using CPUController.UI.MVVM;
 

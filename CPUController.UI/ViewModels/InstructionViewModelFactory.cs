@@ -1,12 +1,12 @@
 ﻿using System;
 
-using CPUController.UI.ViewModels;
+using CPUController.Core.Instructions;
 
-namespace CPUController.UI.Extensions
+namespace CPUController.UI.ViewModels
 {
-    internal static class ViewModelExtensions
+    public static class InstructionViewModelFactory
     {
-        internal static IInstructionViewModel AsViewModel(this IInstruction instruction)
+        public static InstructionViewModelBase AsViewModel(this IInstruction instruction)
         {
             switch (instruction)
             {

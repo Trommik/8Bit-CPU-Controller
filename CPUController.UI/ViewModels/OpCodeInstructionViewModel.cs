@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 
+using CPUController.Core;
+using CPUController.Core.Instructions;
 using CPUController.UI.MVVM;
 
 using JetBrains.Annotations;
@@ -9,37 +11,35 @@ using PropertyChanged;
 
 namespace CPUController.UI.ViewModels
 {
-    public class OpCodeInstructionViewModel : ViewModelBase, IInstructionViewModel
+    public class OpCodeInstructionViewModel : InstructionViewModelBase
     {
         private readonly OpCodeInstruction _instruction;
 
         /// <inheritdoc />
-        public event EventHandler MemorySizeChanged;
-
-        [SuppressPropertyChangedWarnings]
-        private void OnMemorySizeChanged()
-        {
-            MemorySizeChanged?.Invoke(this, EventArgs.Empty);
-        }
+        public override IInstruction Instruction => _instruction;
 
         /// <inheritdoc />
-        public IInstruction Instruction => _instruction;
-
-        /// <inheritdoc />
-        public byte MemoryAddress
+        public override byte MemoryAddress
         {
             get => _instruction.Address;
             set => _instruction.Address = value;
         }
 
         /// <inheritdoc />
-        [DependsOn(nameof(CurrentOpCode))]
-        public byte MemorySize => _instruction.NeedsParameter ? (byte)2 : (byte)1;
+        [DependsOn(nameof(OpCode))]
+        public override byte MemorySize => _instruction.NeedsParameter ? (byte)2 : (byte)1;
+
+        /// <inheritdoc />
+        public override string Comment
+        {
+            get => _instruction.Comment;
+            set => _instruction.Comment = value;
+        }
 
         /// <summary>
-        /// The current selected <see cref="OpCode"/>.
+        /// The current selected <see cref="Core.OpCode"/> of this instruction.
         /// </summary>
-        public OpCode CurrentOpCode
+        public OpCode OpCode
         {
             get => _instruction.OpCode;
             set => _instruction.OpCode = value;
@@ -52,27 +52,18 @@ namespace CPUController.UI.ViewModels
         }
 
         /// <summary>
-        /// The visibility of the opcode parameter. 
+        /// The current visibility of the opcode parameter. 
         /// </summary>
-        [DependsOn(nameof(CurrentOpCode))]
+        [DependsOn(nameof(OpCode))]
         public Visibility ShowParameter => _instruction.NeedsParameter ? Visibility.Visible : Visibility.Hidden;
 
         /// <summary>
-        /// The parameter of the opcode. 
+        /// The current parameter of this opcode instruction. 
         /// </summary>
-        public byte OpCodeParameter
+        public byte Parameter
         {
             get => _instruction.Parameter;
             set => _instruction.Parameter = value;
-        }
-
-        /// <summary>
-        /// The comment of the instruction. 
-        /// </summary>
-        public string Comment
-        {
-            get => _instruction.Comment;
-            set => _instruction.Comment = value;
         }
 
         public OpCodeInstructionViewModel(OpCodeInstruction instruction)

@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Markup;
 
+using CPUController.Core;
 using CPUController.Services;
 using CPUController.UI.MVVM;
 

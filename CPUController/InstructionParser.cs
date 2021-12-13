@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Linq;
 
+using CPUController.Core;
+using CPUController.Core.Instructions;
 using CPUController.Extensions;
 
 namespace CPUController
