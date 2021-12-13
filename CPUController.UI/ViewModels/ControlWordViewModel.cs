@@ -37,7 +37,7 @@ namespace CPUController.UI.ViewModels
             cpuControllerService.Refresh += CpuControllerServiceOnRefresh;
         }
 
-        private async void CpuControllerServiceOnRefresh(object? sender, CpuControllerRefreshEventArgs e)
+        private async void CpuControllerServiceOnRefresh([CanBeNull]object sender, CpuControllerRefreshEventArgs e)
         {
             if (!e.IsReachable)
                 return;
