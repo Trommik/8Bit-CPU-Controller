@@ -17,7 +17,7 @@ namespace CPUController
             // Store the comment if it is available 
             var comment = string.Empty;
             if (instructionParts.Length > 1)
-                comment = instructionParts[1];
+                comment = instructionParts[1].Trim();
             
             string[] opCodeParts = instructionParts[0].Split(",");
 
