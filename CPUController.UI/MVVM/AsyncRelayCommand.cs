@@ -75,6 +75,7 @@ namespace CPUController.UI.MVVM
             finally
             {
                 Interlocked.Exchange(ref _isExecuting, 0);
+                RaiseCanExecuteChanged();
             }
         }
 
