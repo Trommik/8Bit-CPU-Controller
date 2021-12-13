@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
-             xmlns:extensions="clr-namespace:CPUController.UI.Extensions"
+             xmlns:me="clr-namespace:CPUController.UI.MarkupExtensions"
              xmlns:core="clr-namespace:CPUController.Core;assembly=CPUController"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
@@ -25,7 +25,7 @@
             <ComboBox Grid.Column="1" MinWidth="65" FontWeight="Bold" IsEditable="True"
                       HorizontalContentAlignment="Center" VerticalAlignment="Center"
                       IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding OpCode}"
-                      ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type core:OpCode}}}" />
+                      ItemsSource="{Binding Source={me:EnumBindingSource {x:Type core:OpCode}}}" />
             <TextBox Grid.Column="2" MinWidth="65" FontWeight="Bold" Visibility="{Binding ShowParameter}"
                      Text="{Binding Parameter, Converter={StaticResource HexConverter}}"
                      VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />

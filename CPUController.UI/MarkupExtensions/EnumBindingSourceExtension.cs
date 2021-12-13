@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace CPUController.UI.Extensions
+namespace CPUController.UI.MarkupExtensions
 {
     internal class EnumBindingSourceExtension : MarkupExtension
     {

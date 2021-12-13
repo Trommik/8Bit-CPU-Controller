@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace CPUController.UI.Extensions
+namespace CPUController.UI.MarkupExtensions
 {
     internal class EnumDescriptionTypeConverter : EnumConverter
     {
