@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:ConfigViewModel}"
@@ -23,24 +24,21 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Endpoint [url]:" FontWeight="Bold"
-                       VerticalAlignment="Center" Margin="5 1" />
+                       VerticalAlignment="Center" Margin="5 1 10 1" />
 
-            <ScrollViewer Grid.Row="0" Grid.Column="1" x:Name="ScrollViewerEndpoint"
+            <ScrollViewer Grid.Row="0" Grid.Column="1" x:Name="ScrollViewer"
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
                 <TextBox Text="{Binding Endpoint}"
-                         MaxWidth="{Binding ElementName=ScrollViewerEndpoint, Path=ActualWidth}"
+                         MaxWidth="{Binding ElementName=ScrollViewer, Path=ActualWidth}"
                          HorizontalAlignment="Stretch" Margin="0 2" />
             </ScrollViewer>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Refresh Rate [ms]:" FontWeight="Bold"
-                       VerticalAlignment="Center" Margin="5 1" />
-
-            <ScrollViewer Grid.Row="1" Grid.Column="1" x:Name="ScrollViewerRefreshRate"
-                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-                <TextBox Text="{Binding RefreshRate}"
-                         MaxWidth="{Binding ElementName=ScrollViewerRefreshRate, Path=ActualWidth}"
-                         HorizontalAlignment="Stretch" Margin="0 2" />
-            </ScrollViewer>
+                       VerticalAlignment="Center" Margin="5 1 10 1" />
+            <mah:NumericUpDown Grid.Row="1" Grid.Column="1" 
+                               Value="{Binding RefreshRate}" 
+                               Minimum="20" Maximum="10000" MaxWidth="100"
+                               HorizontalAlignment="Left" Margin="0 2" />
 
             <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Rows="1" Columns="2" Margin="0 5 0 0">
                 <Button Content="Load" Height="30" Command="{Binding LoadCommand}" />
