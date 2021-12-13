@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Timers;
+using System.Threading;
+using System.Threading.Tasks;
 
 using CPUController.DataAccess;
 
@@ -10,21 +11,23 @@ namespace CPUController.Services
         #region Fields
 
         private int _refreshRate;
-        private Timer? _refreshTimer;
-
         private string? _endpoint;
 
         private CpuControllerClient? _cpuClient;
 
+        private Task? _pollingTask; 
+        private CancellationTokenSource? _cancellationTokenSource;
+        
         #endregion
 
         #region Events
 
+        /// <inheritdoc />
         public event EventHandler<CpuControllerRefreshEventArgs>? Refresh;
 
-        private void OnRefresh(CpuControllerClient client, string endpoint, bool isReachable)
+        private void OnRefresh(CpuControllerClient client, bool isReachable)
         {
-            Refresh?.Invoke(this, new CpuControllerRefreshEventArgs(client, endpoint, isReachable));
+            Refresh?.Invoke(this, new CpuControllerRefreshEventArgs(client, isReachable));
         }
 
         #endregion
@@ -39,73 +42,74 @@ namespace CPUController.Services
 
         #endregion
 
-        public void SetEndpoint(string endpoint)
+        /// <inheritdoc />
+        public async Task Initialize(string endpoint, int refreshRate)
         {
             if (string.IsNullOrWhiteSpace(endpoint))
                 throw new ArgumentException($"The {nameof(endpoint)} can't be null or empty!");
-
-            // Dispose the old cpu client
-            if (_cpuClient != null)
-                _cpuClient.Dispose();
-
-            // Set the endpoint and create a new cpu client
-            _endpoint = endpoint;
-            _cpuClient = new CpuControllerClient(_endpoint);
-
-            // Start the refresh timer if it exists 
-            if (_refreshTimer != null)
-                _refreshTimer.Start();
-        }
-
-        public void SetRefreshRate(int refreshRate)
-        {
+            
             if (refreshRate <= 0)
                 throw new ArgumentException($"The {nameof(refreshRate)} must be bigger than 1!");
 
-            // Stop and dispose the old refresh timer 
-            if (_refreshTimer != null)
+            // Clean up the old resources
+            if (_pollingTask != null && _cancellationTokenSource != null)
             {
-                _refreshTimer.Stop();
-                _refreshTimer.Elapsed -= RefreshTimerOnElapsed;
-                _refreshTimer.Dispose();
+                _cancellationTokenSource.Cancel();
+                await _pollingTask;
+                _cancellationTokenSource.Dispose();
+            }
+            
+            if (_cpuClient != null)
+            {
+                _cpuClient.Dispose();
             }
 
-            // Set the refresh rate and create a new refresh timer 
+            // Set the endpoint refresh rate 
+            _endpoint = endpoint;
             _refreshRate = refreshRate;
-            _refreshTimer = new Timer()
-            {
-                Interval = _refreshRate,
-                AutoReset = true
-            };
+            
+            // Create a new cpu client
+            _cpuClient = new CpuControllerClient(_endpoint);
 
-            _refreshTimer.Elapsed += RefreshTimerOnElapsed;
-
-            // Start the refresh timer if the endpoint is not null or empty
-            if (!string.IsNullOrWhiteSpace(_endpoint))
-                _refreshTimer.Start();
+            // Start a new polling task
+            _pollingTask = StartPollingTask();
         }
 
-        private async void RefreshTimerOnElapsed(object sender, ElapsedEventArgs e)
+        private Task StartPollingTask()
         {
-            if (_cpuClient == null || _endpoint == null)
-            {
-                _refreshTimer?.Stop();
+            if (_cpuClient == null)
+                throw new InvalidOperationException("Client not initialized!");
 
-                return;
-            }
-
-            var isReachable = false;
-            try
+            // Create a new cancellation token 
+            _cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = _cancellationTokenSource.Token;
+            
+            return Task.Run(async() =>
             {
-                isReachable = await _cpuClient.CheckConnection();
-            }
-            catch (Exception exception)
-            {
-                // TODO: Test if exception gets thrown when no connection is established!!!
-                Console.WriteLine(exception);
-            }
+                while (true)
+                {
+                    // Poll ESP8266 API
+                    var isReachable = false;
+                    try
+                    {
+                        isReachable = await _cpuClient.CheckConnection();
+                    }
+                    catch
+                    {
+                        /* ignored */
+                    }
 
-            OnRefresh(_cpuClient, _endpoint, isReachable);
+                    // Fire the refresh event
+                    OnRefresh(_cpuClient, isReachable);
+                    
+                    // Wait till the refresh rate is elapsed
+                    Thread.Sleep(_refreshRate);
+                    
+                    // Check if cancellation is requested
+                    if (cancellationToken.IsCancellationRequested)
+                        break;
+                }
+            }, cancellationToken);
         }
     }
 }

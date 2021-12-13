@@ -36,9 +36,9 @@ namespace CPUController.UI.ViewModels
         }
 
         [UsedImplicitly]
-        private void OnEndpointChanged()
+        private async void OnEndpointChanged()
         {
-            _cpuControllerService.SetEndpoint(Config.Endpoint);
+            await _cpuControllerService.Initialize(Config.Endpoint, Config.RefreshRate);
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace CPUController.UI.ViewModels
         }
 
         [UsedImplicitly]
-        private void OnRefreshRateChanged()
+        private async void OnRefreshRateChanged()
         {
-            _cpuControllerService.SetRefreshRate(Config.RefreshRate);
+            await _cpuControllerService.Initialize(Config.Endpoint, Config.RefreshRate);
         }
 
         #endregion
