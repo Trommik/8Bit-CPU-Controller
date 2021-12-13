@@ -14,7 +14,7 @@ namespace CPUController.UI.Extensions
             {
                 if (value != _enumType)
                 {
-                    if (null != value)
+                    if (value != null)
                     {
                         var enumType = Nullable.GetUnderlyingType(value) ?? value;
 
@@ -36,13 +36,13 @@ namespace CPUController.UI.Extensions
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (null == _enumType)
+            if (_enumType == null)
                 throw new InvalidOperationException("The EnumType must be specified.");
 
             var actualEnumType = Nullable.GetUnderlyingType(_enumType) ?? _enumType;
             var enumValues = Enum.GetValues(actualEnumType);
 
-            if (actualEnumType == _enumType)
+            if (_enumType == actualEnumType)
                 return enumValues;
 
             var tempArray = Array.CreateInstance(actualEnumType, enumValues.Length + 1);

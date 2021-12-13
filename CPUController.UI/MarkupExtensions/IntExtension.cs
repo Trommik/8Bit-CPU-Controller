@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Windows.Markup;
 
-using JetBrains.Annotations;
-
 namespace CPUController.UI.MarkupExtensions
 {
-    [UsedImplicitly]
     internal sealed class IntExtension : MarkupExtension
     {
         /// <summary>
