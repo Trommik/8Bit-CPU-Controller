@@ -9,7 +9,6 @@ using System.Windows.Input;
 using CPUController.Core;
 using CPUController.Core.Instructions;
 using CPUController.Services;
-using CPUController.UI.Extensions;
 using CPUController.UI.MVVM;
 
 using Microsoft.Win32;
