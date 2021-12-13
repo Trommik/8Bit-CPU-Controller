@@ -11,10 +11,6 @@
              VerticalAlignment="Center" HorizontalAlignment="Stretch"
              DataContext="{Binding ModeVm, Source={StaticResource ViewModelLocator}}">
 
-    <UserControl.Resources>
-        <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource LampToggleButtonStyle}" />
-    </UserControl.Resources>
-
     <StackPanel Orientation="Vertical">
         <GroupBox Header="Status:" Margin="5">
             <Grid>

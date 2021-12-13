@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
-             xmlns:models="clr-namespace:CPUController;assembly=CPUController"
              xmlns:extensions="clr-namespace:CPUController.UI.Extensions"
              xmlns:core="clr-namespace:CPUController.Core;assembly=CPUController"
              mc:Ignorable="d"

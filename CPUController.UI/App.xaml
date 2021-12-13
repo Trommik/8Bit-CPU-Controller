@@ -120,6 +120,8 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            
+            <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource LampToggleButtonStyle}" />
 
             <!-- Custom GroupBox Style -->
             <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource MahApps.Styles.GroupBox}">
