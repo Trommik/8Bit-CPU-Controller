@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Markup;
 
@@ -8,10 +9,14 @@ using CPUController.UI.MVVM;
 
 using JetBrains.Annotations;
 
+using NLog;
+
 namespace CPUController.UI.ViewModels
 {
     public class ModeViewModel : ViewModelBase
     {
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly ICpuControllerService _cpuControllerService;
 
         #region Properties
@@ -20,12 +25,6 @@ namespace CPUController.UI.ViewModels
         /// The current mode of the cpu. 
         /// </summary>
         public CpuMode Mode { get; set; }
-
-        [UsedImplicitly]
-        private async void OnModeChanged()
-        {
-            await _cpuControllerService.CpuClient.SetMode(Mode);
-        }
 
         /// <summary>
         /// True when the <see cref="Mode"/> is <see cref="CpuMode.LoadCode"/>.
@@ -50,7 +49,7 @@ namespace CPUController.UI.ViewModels
         /// <summary>
         /// True when the cpus rest server is reachable else false. 
         /// </summary>
-        public bool IsReachable { get; set; }
+        public bool IsCpuReachable { get; private set; }
 
         #endregion
 
@@ -62,27 +61,54 @@ namespace CPUController.UI.ViewModels
 
         private async void CpuControllerServiceOnRefresh([CanBeNull]object sender, CpuControllerRefreshEventArgs e)
         {
-            IsReachable = e.IsReachable;
-            if (!IsReachable)
+            IsCpuReachable = e.IsReachable;
+            if (!IsCpuReachable)
                 return;
 
-            var modeResponse = await e.Client.GetMode();
-            if (modeResponse.LoadCodeMode)
-                Mode = CpuMode.LoadCode;
-            else if (modeResponse.ExecuteMode)
-                Mode = CpuMode.Execute;
-            else
-                Mode = CpuMode.None;
+            try 
+            { 
+                var modeResponse = await e.Client.GetMode();
+                if (modeResponse.LoadCodeMode)
+                    Mode = CpuMode.LoadCode;
+                else if (modeResponse.ExecuteMode)
+                    Mode = CpuMode.Execute;
+                else
+                    Mode = CpuMode.None;
+            }
+            catch (Exception exception)
+            {
+                _logger.Error(exception);
+            }
         }
 
         /// <summary>
         /// Command to reset the cpu. 
         /// </summary>
-        public ICommand ResetCpuCommand => new AsyncRelayCommand(ResetCpu);
+        public ICommand ResetCpuCommand => new AsyncRelayCommand(ResetCpu, CanResetCpu);
 
+        private bool CanResetCpu()
+        {
+            return IsCpuReachable;
+        }
+        
         private async Task ResetCpu()
         {
             await _cpuControllerService.CpuClient.Reset();
+        }
+
+        /// <summary>
+        /// Command to set the cpu into the current mode. 
+        /// </summary>
+        public ICommand SetModeCommand => new AsyncRelayCommand(SetMode, CanSetMode);
+
+        private bool CanSetMode()
+        {
+            return IsCpuReachable;
+        }
+        
+        private async Task SetMode()
+        {
+            await _cpuControllerService.CpuClient.SetMode(Mode);
         }
 
     }

@@ -1,16 +1,19 @@
 ﻿
 using System;
-using System.Diagnostics;
 
 using CPUController.Services;
 using CPUController.UI.MVVM;
 
 using JetBrains.Annotations;
 
+using NLog;
+
 namespace CPUController.UI.ViewModels
 {
     public class ControlWordViewModel : ViewModelBase
     {
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         #region Properties
 
         /// <summary>
@@ -42,9 +45,15 @@ namespace CPUController.UI.ViewModels
             if (!e.IsReachable)
                 return;
             
-            var controlWordResponse = await e.Client.GetControlWord();
-
-            ControlWord = controlWordResponse.ControlWord;
+            try 
+            { 
+                var controlWordResponse = await e.Client.GetControlWord();
+                ControlWord = controlWordResponse.ControlWord;
+            }
+            catch (Exception exception)
+            {
+                _logger.Error(exception);
+            }
         }
     }
 }

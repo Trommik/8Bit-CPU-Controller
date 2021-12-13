@@ -11,6 +11,8 @@ using CPUController.Core.Instructions;
 using CPUController.Services;
 using CPUController.UI.MVVM;
 
+using JetBrains.Annotations;
+
 using Microsoft.Win32;
 
 namespace CPUController.UI.ViewModels
@@ -18,6 +20,8 @@ namespace CPUController.UI.ViewModels
     public class ProgramViewModel : ViewModelBase
     {
         private readonly ICpuControllerService _cpuControllerService;
+
+        private bool _isCpuReachable; 
 
         #region Properties
 
@@ -36,6 +40,7 @@ namespace CPUController.UI.ViewModels
         public ProgramViewModel(ICpuControllerService cpuControllerService)
         {
             _cpuControllerService = cpuControllerService;
+            _cpuControllerService.Refresh += CpuControllerServiceOnRefresh;
 
             // Initialize the Instructions collection and hookup the memory size changed event
             Instructions.CollectionChanged += (s, e) =>
@@ -54,7 +59,12 @@ namespace CPUController.UI.ViewModels
             Instructions.Add(new OpCodeInstructionViewModel(new OpCodeInstruction() { OpCode = OpCode.HLT }));
         }
 
-        private void Instruction_MemorySizeChanged(object sender, EventArgs e)
+        private void CpuControllerServiceOnRefresh([CanBeNull]object sender, CpuControllerRefreshEventArgs e)
+        {
+            _isCpuReachable = e.IsReachable;
+        }
+
+        private void Instruction_MemorySizeChanged([CanBeNull]object sender, EventArgs e)
         {
             // Update the memory address of each instruction when the collection changes
             for (byte i = 0; i < Instructions.Count; i++)
@@ -219,7 +229,7 @@ namespace CPUController.UI.ViewModels
         /// </summary>
         public ICommand UploadToCpuCommand => new AsyncRelayCommand(UploadToCpu, CanUploadToCpu);
 
-        private bool CanUploadToCpu() => Instructions.Any();
+        private bool CanUploadToCpu() => _isCpuReachable && Instructions.Any();
 
         private async Task UploadToCpu()
         {
