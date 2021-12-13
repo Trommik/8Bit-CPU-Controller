@@ -12,6 +12,9 @@ namespace CPUController
         /// <inheritdoc />
         public byte Value { get; private set; }
 
+        /// <inheritdoc />
+        public string Comment { get; set; } = string.Empty;
+
         /// <summary>
         /// The opcode of this instruction. 
         /// </summary>
@@ -58,7 +61,9 @@ namespace CPUController
         /// <inheritdoc />
         public override string ToString()
         {
-            return NeedsParameter ? $"{OpCode}, 0x{Parameter:X2}" : $"{OpCode}";
+            string command = NeedsParameter ? $"{OpCode}, 0x{Parameter:X2}" : $"{OpCode}";
+
+            return string.IsNullOrWhiteSpace(Comment) ? command : $"{command} // {Comment}";
         }
 
         /// <inheritdoc />

@@ -8,6 +8,9 @@
         /// <inheritdoc />
         public byte Value { get; set; }
 
+        /// <inheritdoc />
+        public string Comment { get; set; } = string.Empty;
+
         /// <summary>
         /// Initializes a new <see cref="ValueInstruction"/>.
         /// </summary>
@@ -25,7 +28,7 @@
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"0x{Value:X2}";
+            return string.IsNullOrWhiteSpace(Comment) ? $"0x{Value:X2}" : $"0x{Value:X2} // {Comment}";
         }
 
         /// <inheritdoc />

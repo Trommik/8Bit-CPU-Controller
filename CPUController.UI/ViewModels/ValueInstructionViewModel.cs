@@ -41,6 +41,15 @@ namespace CPUController.UI.ViewModels
             set => _instruction.Value = value;
         }
 
+        /// <summary>
+        /// The comment of the instruction. 
+        /// </summary>
+        public string Comment
+        {
+            get => _instruction.Comment;
+            set => _instruction.Comment = value;
+        }
+
         public ValueInstructionViewModel(ValueInstruction instruction)
         {
             _instruction = instruction;

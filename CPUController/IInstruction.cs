@@ -13,6 +13,11 @@
         byte Value { get; }
 
         /// <summary>
+        /// The comment of the instruction. 
+        /// </summary>
+        string Comment { get; set; }
+        
+        /// <summary>
         /// Returns a byte array that represents the current instruction. 
         /// </summary>
         /// <returns>A byte array that represents the current instruction. </returns>
