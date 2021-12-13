@@ -10,7 +10,7 @@ namespace CPUController.UI
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -48,11 +48,11 @@ namespace CPUController.UI
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Exception in LogUnhandledException");
+                _logger.Error(ex);
             }
             finally
             {
-                _logger.Error(exception, message);
+                _logger.Error(exception);
                 MessageBox.Show($"{message}\n{exception.Message}", "Unhandled Exception!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
