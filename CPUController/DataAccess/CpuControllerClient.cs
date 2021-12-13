@@ -37,7 +37,6 @@ namespace CPUController.DataAccess
             HttpResponseMessage response = await _client.GetAsync(string.Empty);
 
             string data = await response.Content.ReadAsStringAsync();
-
             return data.Equals("8-Bit CPU REST API v1");
         }
 
