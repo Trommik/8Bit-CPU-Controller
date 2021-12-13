@@ -1,9 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 using CPUController.Core;
 using CPUController.Core.Instructions;
-using CPUController.UI.MVVM;
 
 using JetBrains.Annotations;
 
@@ -46,7 +44,7 @@ namespace CPUController.UI.ViewModels
         }
 
         [UsedImplicitly]
-        private void OnCurrentOpCodeChanged()
+        private void OnOpCodeChanged()
         {
             OnMemorySizeChanged();
         }

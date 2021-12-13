@@ -23,21 +23,25 @@ namespace CPUController.UI.ViewModels
         /// <summary>
         /// The <see cref="IInstruction"/> for this <see cref="InstructionViewModelBase"/>.
         /// </summary>
+        [SuppressPropertyChangedWarnings]
         public abstract IInstruction Instruction { get; }
 
         /// <summary>
         /// The current memory address of this instruction. 
         /// </summary>
+        [SuppressPropertyChangedWarnings]
         public abstract byte MemoryAddress { get; set; }
 
         /// <summary>
         /// The current memory size of this instruction. 
         /// </summary>
+        [SuppressPropertyChangedWarnings]
         public abstract byte MemorySize { get; }
         
         /// <summary>
         /// The current comment of this instruction. 
         /// </summary>
+        [SuppressPropertyChangedWarnings]
         public abstract string Comment { get; set; }
     }
 }
