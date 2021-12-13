@@ -178,12 +178,13 @@ namespace CPUController.UI.ViewModels
 
         private void AddInstruction()
         {
+            int insertIndex = Instructions.IndexOf(SelectedInstruction) + 1;
             var newInstruction = new OpCodeInstruction()
             {
                 Address = (byte)Instructions.Count
             };
 
-            Instructions.Add(newInstruction.AsViewModel());
+            Instructions.Insert(insertIndex, newInstruction.AsViewModel());
         }
 
         /// <summary>
@@ -203,12 +204,13 @@ namespace CPUController.UI.ViewModels
 
         private void AddValue()
         {
+            int insertIndex = Instructions.IndexOf(SelectedInstruction) + 1;
             var newInstruction = new ValueInstruction()
             {
                 Address = (byte)Instructions.Count
             };
 
-            Instructions.Add(newInstruction.AsViewModel());
+            Instructions.Insert(insertIndex, newInstruction.AsViewModel());
         }
 
         /// <summary>
