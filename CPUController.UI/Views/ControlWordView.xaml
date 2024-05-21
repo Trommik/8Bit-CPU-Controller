@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="CPUController.UI.Views.ControlWordView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:CPUController.UI.ViewModels"
+             xmlns:valueConverter="clr-namespace:CPUController.UI.ValueConverter"
+             xmlns:me="clr-namespace:CPUController.UI.MarkupExtensions"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance viewModels:ControlWordViewModel}"
+             VerticalAlignment="Center" HorizontalAlignment="Center"
+             DataContext="{Binding ControlWordVm, Source={StaticResource ViewModelLocator}}">
+
+    <UserControl.Resources>
+        <valueConverter:BitValueConverter x:Key="ControlWordConverter" />
+        <valueConverter:ByteDemuxConverter x:Key="OutputRegisterConverter" />
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="Control Word:" Margin="5">
+            <UniformGrid Rows="2" Columns="8">
+                <ToggleButton Content="HLT" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 0}}"
+                              ToolTip="Stops the clock and halts the CPU" />
+                <ToggleButton Content="JMP" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 1}}"
+                              ToolTip="Jump to value from the BUS" />
+                <ToggleButton Content="PCE" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 2}}"
+                              ToolTip="Counter Enable" />
+                <ToggleButton Content="ARI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 3}}"
+                              ToolTip="Input value from BUS to A register" />
+                <ToggleButton Content="BRI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 4}}"
+                              ToolTip="Input value from BUS to B register" />
+                <ToggleButton Content="RDY" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 5}}"
+                              ToolTip="Control signals ready" />
+                <ToggleButton Content="ORI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 6}}"
+                              ToolTip="Input value from BUS to output register" />
+                <ToggleButton Content="RRI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 7}}"
+                              ToolTip="Input value from BUS and write into RAM" />
+                <ToggleButton Content="MAI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 8}}"
+                              ToolTip="Input value from BUS to Memory Address Register" />
+                <ToggleButton Content="FRI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 9}}"
+                              ToolTip="Input results to flags register" />
+                <ToggleButton Content="SUB" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 10}}"
+                              ToolTip="Subtract B-Register mode" />
+                <ToggleButton Content="IRI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 11}}"
+                              ToolTip="Input value from BUS to Instruction Register" />
+                <ToggleButton Content="CRI" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 12}}"
+                              ToolTip="Input value from BUS to C Register" />
+                <ToggleButton Content="DA0" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 13}}"
+                              ToolTip="Address one of output register demux" />
+                <ToggleButton Content="DA1" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 14}}"
+                              ToolTip="Address two of output register demux" />
+                <ToggleButton Content="DA2" IsEnabled="False"
+                              IsChecked="{Binding ControlWord, Converter={StaticResource ControlWordConverter}, ConverterParameter={me:Int 15}}"
+                              ToolTip="Address three of output register demux" />
+            </UniformGrid>
+        </GroupBox>
+        <GroupBox Header="Output Register:" Margin="5">
+            <UniformGrid Rows="1" Columns="8">
+                <ToggleButton Content="" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 0}}"
+                              ToolTip="All Output registers off"/>
+                <ToggleButton Content="PCO" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 1}}"
+                              ToolTip="Output value from Counter to the BUS" />
+                <ToggleButton Content="ARO" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 2}}"
+                              ToolTip="Output value from A-Register to the BUS" />
+                <ToggleButton Content="BRO" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 3}}"
+                              ToolTip="Output value from B-Register to the BUS" />
+                <ToggleButton Content="ERO" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 4}}"
+                              ToolTip="Output value from E-Register (ALU) to the BUS" />
+                <ToggleButton Content="RRO" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 5}}"
+                              ToolTip="Output value from RAM-Register to the BUS" />
+                <ToggleButton Content="CRO" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 6}}"
+                              ToolTip="Output value from C-Register to the BUS" />
+                <ToggleButton Content="EPO" IsEnabled="False"
+                              IsChecked="{Binding OutputRegisterAddress, Converter={StaticResource OutputRegisterConverter}, ConverterParameter={me:Int 7}}"
+                              ToolTip="Output value from External Programmer to the BUS" />
+            </UniformGrid>
+        </GroupBox>
+    </StackPanel>
+</UserControl>
